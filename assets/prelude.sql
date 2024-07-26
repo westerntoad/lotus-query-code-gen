@@ -69,9 +69,9 @@ CREATE TABLE IF NOT EXISTS cards (
     rarity			  ENUM('common', 'uncommon', 'rare', 'mythic', 'special', 'bonus'),
     
     PRIMARY KEY (uuid),
-    FOREIGN KEY (set_id)                REFERENCES sets(set_id),
-    FOREIGN KEY (mana_cost)             REFERENCES cmc(mana_cost),
-    FOREIGN KEY (color)                 REFERENCES color(abbr),
+    FOREIGN KEY (set_id)                REFERENCES sets(set_id)         ON DELETE CASCADE,
+    FOREIGN KEY (mana_cost)             REFERENCES cmc(mana_cost)		ON DELETE RESTRICT,
+    FOREIGN KEY (color)                 REFERENCES color(abbr)			ON DELETE RESTRICT,
     FOREIGN KEY (color_identity)        REFERENCES color(abbr)
 );
 
