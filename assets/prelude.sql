@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS color (
 CREATE TABLE IF NOT EXISTS cards (
     -- "uuid" property in json
     uuid              CHAR(36),
+    scryfall_id       CHAR(36)        NOT NULL,
     -- id of the set (3-6 letters on bottom left of card)
     set_id            VARCHAR(6)      NOT NULL,
     name              VARCHAR(141)    NOT NULL DEFAULT '',
@@ -66,10 +67,11 @@ CREATE TABLE IF NOT EXISTS cards (
     color             VARCHAR(5),
     -- WUBRG (colors in text, ..., and cost) ->
     color_identity    VARCHAR(5),
-    rarity			  ENUM('common', 'uncommon', 'rare', 'mythic', 'special', 'bonus'),
+    rarity	      ENUM('common', 'uncommon', 'rare', 'mythic', 'special', 'bonus'),
     
     PRIMARY KEY (uuid),
-    FOREIGN KEY (set_id)                REFERENCES sets(set_id)         ON DELETE CASCADE,
+    FOREIGN KEY (set_id)                REFERENCES sets(set_id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (mana_cost)             REFERENCES cmc(mana_cost)		ON DELETE RESTRICT,
     FOREIGN KEY (color)                 REFERENCES color(abbr)			ON DELETE RESTRICT,
     FOREIGN KEY (color_identity)        REFERENCES color(abbr)

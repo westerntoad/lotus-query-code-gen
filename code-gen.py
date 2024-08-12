@@ -96,10 +96,11 @@ def lqInsertCMC(json):
     return s + mana_cost + cmc + ");"
 
 def lqInsertCards(json):
-    s = "INSERT INTO cards (uuid, set_id, name, type, mana_cost, color, color_identity, rarity) VALUES ("
+    s = "INSERT INTO cards (uuid, scryfall_id, set_id, name, type, mana_cost, color, color_identity, rarity) VALUES ("
     mc = json["manaCost"] if "manaCost" in json else ""
 
     uuid           = "'" + json["uuid"] + "', "
+    scryfall_id    = "'" + json["identifiers"]["scryfallId"] + "', "
     set_id         = "'" + json["setCode"] + "', "
     # TODO this is bad
     name           = "'" + json["name"].replace("'", "''") + "', "
@@ -110,7 +111,7 @@ def lqInsertCards(json):
     color_identity = "'" + getColorAbbrFromList(json["colorIdentity"]) + "', "
     rarity         = "'" + json["rarity"] + "'"
 
-    return s + uuid + set_id + name + type + mana_cost + color + color_identity + rarity + ");"
+    return s + uuid + scryfall_id + set_id + name + type + mana_cost + color + color_identity + rarity + ");"
 
 def getColorAbbrFromList(l):
     s = ""
