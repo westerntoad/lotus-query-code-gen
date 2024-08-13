@@ -257,6 +257,8 @@ if __name__ == '__main__':
         print("card     TABLE insertion count = ", cardCount)
         print("creature TABLE insertion count = ", creatureCount)
         print("legality TABLE insertion count = ", legalityCount)
+        print()
+        print("TOTAL INSERTION COUNT = ", cmcCount + cardCount + creatureCount + legalityCount)
 
         if len(setsInserted) == len(allSetCodes): break
         print("")
